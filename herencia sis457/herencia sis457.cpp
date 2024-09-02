@@ -27,10 +27,10 @@ public:
 	void setColumna(short c) { columna = c;}
 	// muestra graficamente el tablero con un punto en la pocision de la pieza en el metodo verInfo
 	void verInfo() {
-		for (int i = 1; i <= 8;i++) {
+		for (int i = 8; i >= 1;i--) {
 				for (int j = 1; j <= 8; j++) {
 					cout <<"|";
-					if ((i-5 == fila || i+5==fila) && j == columna) {
+					if (i == fila  && j == columna) {
 						cout << "Pi";
 					}
 					else {
@@ -208,15 +208,25 @@ int main()
 	pe1.verInfo();
 	cout << "introdusca el numero de cuadros que puede avansar la torre" << endl;
 	cin >> nc;
-	cout << "introdusca la direccion que tendra la torre 2 para blanco 7 para negro" << endl;
-	cin >> d;
+	do {
+		cout << "introdusca la fila que tendra (la torre 1 para el equipo blanco y 8 para equipo negro)" << endl;
+		cin >> d;
+	} while (d != 1 && d != 8);
+	if (d == 1) {
+		d = 2;
+	}
+	if (d == 8) {
+		d = 7;
+	}
 	cout << "introdusca la columna en la que se encuentra la torre" << endl;
 	cin >> cot;
 	Torre to1(nc, d, cot);//(ncuadros,direccion,columna)
 	to1.verInfo();
-	cout << "introdusca la direccion a la que quiere mover la torre 2 para arriba 7 para abajo 4 para la izquierda y 5 para la derecha" << endl;
+	cout << "introdusca la direccion a la que quiere mover la torre (2 para arriba 7 para abajo 4 para la izquierda y 5 para la derecha)" << endl;
 	cin >> mdi;
 	cout << "" << endl;
 	to1.avanzarTo(nc,mdi);
+	to1.verInfo();
+
     return 0;
 }
